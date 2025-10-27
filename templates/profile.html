@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 flex justify-center items-start py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+    <!-- Cover Image -->
+    <div class="h-40 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 relative">
+      <div class="absolute left-1/2 -bottom-12 transform -translate-x-1/2">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0amZ6JYcXM__iA-qeenidfFtXyfeIPaZMw&s" 
+             alt="{{ user.username }}" 
+             class="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover">
+      </div>
+    </div>
+
+    <!-- User Info -->
+    <div class="mt-16 text-center px-6">
+      <h2 class="text-2xl font-semibold text-gray-800 capitalize">{{ user.get_full_name|default:user.username }}</h2>
+      <p class="text-sm text-gray-500">@{{ user.username }}</p>
+      <p class="text-gray-600 mt-2">Member since {{ user.date_joined|date:"F Y" }}</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="mt-8 grid grid-cols-3 divide-x border-t border-b">
+      <div class="py-4 text-center">
+        <h3 class="text-lg font-bold text-gray-800">152</h3>
+        <p class="text-sm text-gray-500">Messages</p>
+      </div>
+      <div class="py-4 text-center">
+        <h3 class="text-lg font-bold text-gray-800">12</h3>
+        <p class="text-sm text-gray-500">Contacts</p>
+      </div>
+      <div class="py-4 text-center">
+        <h3 class="text-lg font-bold text-gray-800">5</h3>
+        <p class="text-sm text-gray-500">Groups</p>
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="px-6 py-6 space-y-4 text-gray-700">
+      <div>
+        <h4 class="text-sm font-semibold text-gray-500 uppercase">Email</h4>
+        <p class="text-base">{{ user.email }}</p>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-gray-500 uppercase">Username</h4>
+        <p class="text-base">{{ user.username }}</p>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-gray-500 uppercase">Joined</h4>
+        <p class="text-base">{{ user.date_joined|date:"F j, Y" }}</p>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-center gap-4 pb-8">
+      <a href="{% url 'chat' %}" 
+         class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg hover:bg-indigo-700 transition">
+        Open Chat
+      </a>
+      <a href="{% url 'logout_user' %}" 
+         class="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-lg hover:bg-gray-200 transition">
+        Logout
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

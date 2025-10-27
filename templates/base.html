@@ -22,21 +22,24 @@
                 </div>
 
                 <nav class="hidden md:flex space-x-6">
-                    <a href="" class="text-gray-700 hover:text-blue-500 transition">Home</a>
-                    <a href="" class="text-gray-700 hover:text-blue-500 transition">Profile</a>
-                    <a href="" class="text-gray-700 hover:text-blue-500 transition">Chats</a>
+                    <a href="{% url 'home' %}" class="text-gray-700 hover:text-blue-500 transition">Home</a>
+                    <a href="{% url 'profile' %}" class="text-gray-700 hover:text-blue-500 transition">Profile</a>
+                    <a href="{% url 'chat' %}" class="text-gray-700 hover:text-blue-500 transition">Chats</a>
                 </nav>
 
                 <div class="flex items-center space-x-4">
-                    <span class="hidden sm:inline text-sm text-gray-500">Hi, Rasel</span>
-                    <a href="" 
+                    {% if user.is_authenticated %}
+                    <span class="hidden sm:inline text-sm text-gray-500">Hi, {{ user.username }}</span>
+                    <a href="{% url 'logout_user' %}" 
                         class="text-sm bg-blue-500 text-white px-3 py-1.5 rounded-md hover:bg-blue-600 transition">
                         Logout
                     </a>
-                    <a href="" 
+                    {% else %}
+                    <a href="{% url 'login' %}" 
                         class="text-sm bg-blue-500 text-white px-3 py-1.5 rounded-md hover:bg-blue-600 transition">
                         Login
                     </a>
+                    {% endif %}
 
                     <button class="md:hidden focus:outline-none" id="menu-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
@@ -50,9 +53,9 @@
         </div>
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
             <nav class="px-4 py-3 space-y-2">
-                <a href="" class="block text-gray-700 hover:text-blue-500">Home</a>
-                <a href="" class="block text-gray-700 hover:text-blue-500">Chats</a>
-                <a href="" class="block text-gray-700 hover:text-blue-500">Profile</a>
+                <a href="{% url 'home' %}" class="block text-gray-700 hover:text-blue-500">Home</a>
+                <a href="{% url 'chat' %}" class="block text-gray-700 hover:text-blue-500">Chats</a>
+                <a href="{% url 'profile' %}" class="block text-gray-700 hover:text-blue-500">Profile</a>
             </nav>
         </div>
     </header>
